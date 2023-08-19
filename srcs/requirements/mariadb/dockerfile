@@ -12,4 +12,4 @@ RUN		chmod +x script.sh
 
 EXPOSE	3306
 
-ENTRYPOINT ["bash", "script.sh" ]
+CMD [ "/script.sh" ]
