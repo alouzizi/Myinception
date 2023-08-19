@@ -1,0 +1,18 @@
+FROM	debian:bullseye
+
+RUN		apt-get update && apt-get upgrade
+
+RUN		apt install nginx -y \
+		openssl
+
+RUN		mkdir -p /etc/nginx/ssl
+RUN		openssl req -x509 -days 365 -nodes -out /etc/nginx/ssl/alouzizi.crt -keyout /etc/nginx/ssl/alouzizi.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=login"
+
+COPY	./conf/nginx.conf /etc/nginx/conf.d
+
+
+EXPOSE 443
+
+CMD ["nginx", "-g", "daemon off;"]
+
+					
