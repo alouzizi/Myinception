@@ -4,7 +4,7 @@ services:
     container_name: nginx
     ports:
       - "443:443"
-    restart: on-failure
+    restart: always
     volumes:
       - wordpressDB:/var/www/html
     build:
@@ -23,7 +23,7 @@ services:
     networks:
       - network
     env_file: .env
-    restart: unless-stopped
+    restart: always
 
   wordpress:
     container_name: wordpress
@@ -37,8 +37,6 @@ services:
     restart: always
     depends_on:
       - mariadb
-    ports:
-      - "9000:9000"
 
 volumes:
   wordpressDB:
@@ -46,13 +44,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/alouzizi/data
+      device: /home/alouzizi/data/word
   mariaDB:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/alouzizi/data
+      device: /home/alouzizi/data/maria
 
 networks:
   network:

@@ -18,17 +18,3 @@ stop:
 restart:
 	docker-compose -f $(COMPOSE_FILE) restart
 
-logs:
-	docker-compose -f $(COMPOSE_FILE) logs -f
-
-# Clean commands
-clean-images:
-	docker rmi -f $$(docker images -q)
-
-clean-containers:
-	docker rm -f $$(docker ps -aq)
-
-clean-volumes:
-	docker volume rm -f $(docker volume ls -q)
-
-clean: clean-containers clean-images clean-volumes
